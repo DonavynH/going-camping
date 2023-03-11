@@ -23,8 +23,8 @@ public class LandingView extends GoingCampingView implements LandingViewCalibrat
     }
 
     private UiElement getLandingHeaderElement() {
-        String description = "Empty message";
-        String locatorValue = "empty-message";
+        String description = "Landing Header";
+        String locatorValue = "landing-header";
         return getViewElementById(description, locatorValue);
     }
 
