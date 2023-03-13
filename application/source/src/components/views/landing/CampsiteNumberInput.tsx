@@ -32,7 +32,7 @@ const CampsiteNumberInput: NextPage = () => {
                  onChange={(e) => handleOnChange(e)} value={camperData.campsite}/>
       <TextField name="name" id="camper-name" label="Campers Name" variant="outlined"
                  onChange={(e) => handleOnChange(e)} value={camperData.name}/>
-      <Button type="submit" variant="contained">Join</Button>
+      <Button type="submit" variant="contained" id="camper-submit">Join</Button>
     </Box>
   );
 };

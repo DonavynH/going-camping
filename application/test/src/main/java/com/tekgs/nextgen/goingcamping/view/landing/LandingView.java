@@ -3,7 +3,11 @@ package com.tekgs.nextgen.goingcamping.view.landing;
 import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiLocatorType;
 import com.softwareonpurpose.uinavigator.UiView;
+import com.tekgs.nextgen.goingcamping.data.input.CamperPostData;
 import com.tekgs.nextgen.goingcamping.view.GoingCampingView;
+import com.tekgs.nextgen.goingcamping.view.loading.LoadingView;
+
+import java.util.List;
 
 public class LandingView extends GoingCampingView implements LandingViewCalibratable {
 
@@ -31,5 +35,30 @@ public class LandingView extends GoingCampingView implements LandingViewCalibrat
     @Override
     public String getLandingHeader() {
         return getLandingHeaderElement().getText();
+    }
+
+    public LoadingView submit(CamperPostData camperPostData) {
+        getCampsiteInput().set(camperPostData.getCampsite());
+        getNameInput().set(camperPostData.getName());
+        getSubmitElement().click();
+        return UiView.expect(LoadingView.class);
+    }
+
+    private UiElement getSubmitElement() {
+        String locatorId = "camper-submit";
+        String description = "Camper Submit";
+        return getViewElementById(description, locatorId);
+    }
+
+    private UiElement getNameInput() {
+        String locatorId = "camper-name";
+        String description = "Camper Name";
+        return getViewElementById(description, locatorId);
+    }
+
+    private UiElement getCampsiteInput() {
+        String description = "Campsite Input";
+        String locatorId = "campsite-number";
+        return getViewElementById(description, locatorId);
     }
 }
