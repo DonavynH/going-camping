@@ -11,7 +11,8 @@ const Landing: NextPage = () => {
            display: "flex",
            flexDirection: "column",
            justifyContent: "center",
-           alignItems: "center"
+           alignItems: "center",
+           gap: "1rem"
          }}>
       <Image src={campfire} alt="campfire" width={300}/>
       <h1 id="landing-header">I'm going camping and bringing...</h1>

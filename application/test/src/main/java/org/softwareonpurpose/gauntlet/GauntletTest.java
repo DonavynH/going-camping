@@ -97,6 +97,7 @@ public abstract class GauntletTest {
  public enum View {
   ;
   public static final String LANDING = "landing";
+  public static final String LOADING = "loading";
  }
 
  public static class TestSuite {

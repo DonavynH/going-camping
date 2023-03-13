@@ -13,4 +13,5 @@ public class LandingViewTest extends GauntletTest {
         LandingView actual = LandingView.directNav();
         then(LandingVewCalibrator.getInstance(expect, actual));
     }
+
 }
