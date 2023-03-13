@@ -10,7 +10,7 @@ public class LoadingView extends GoingCampingView implements LoadingViewCalibrat
     private static final String DESCRIPTION = "'Loading' view";
     private static final String LOCATOR_TYPE = UiLocatorType.ID;
     private static final String LOCATOR_VALUE = "loading-view";
-    protected LoadingView() {
+    public LoadingView() {
         super(RELATIVE_URI, UiElement.getInstance(DESCRIPTION, LOCATOR_TYPE, LOCATOR_VALUE));
     }
 
