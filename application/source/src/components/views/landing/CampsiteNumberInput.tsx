@@ -1,8 +1,10 @@
 import React, {ChangeEvent, FormEvent, useState} from "react";
 import {NextPage} from "next";
 import {Box, Button, TextField} from "@mui/material";
+import { useRouter } from 'next/router'
 
 const CampsiteNumberInput: NextPage = () => {
+  const router = useRouter()
   type CamperData = {
     campsite: string,
     name: string
@@ -20,6 +22,7 @@ const CampsiteNumberInput: NextPage = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Camper Post Data " + JSON.stringify(camperData));
+    router.push("loading")
   };
   return (
     <Box component={"form"} noValidate autoComplete="off" sx={{
