@@ -5,6 +5,7 @@ import com.softwareonpurpose.uinavigator.UiLocatorType;
 import com.softwareonpurpose.uinavigator.UiView;
 import com.tekgs.nextgen.goingcamping.data.input.CamperPostData;
 import com.tekgs.nextgen.goingcamping.view.GoingCampingView;
+import com.tekgs.nextgen.goingcamping.view.host.HostView;
 import com.tekgs.nextgen.goingcamping.view.loading.LoadingView;
 
 import java.util.List;
@@ -66,5 +67,10 @@ public class LandingView extends GoingCampingView implements LandingViewCalibrat
         String locatorId = "host-button";
         String description = "Host Button";
         return getViewElementById(description, locatorId);
+    }
+
+    public HostView clickHostButton() {
+        getHostButtonElement().click();
+        return UiView.expect(HostView.class);
     }
 }
