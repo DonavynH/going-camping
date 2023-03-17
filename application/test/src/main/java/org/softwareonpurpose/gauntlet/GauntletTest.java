@@ -98,6 +98,7 @@ public abstract class GauntletTest {
   ;
   public static final String LANDING = "landing";
   public static final String LOADING = "loading";
+  public static final String HOST = "host";
  }
 
  public static class TestSuite {

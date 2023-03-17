@@ -61,4 +61,10 @@ public class LandingView extends GoingCampingView implements LandingViewCalibrat
         String locatorId = "campsite-number";
         return getViewElementById(description, locatorId);
     }
+
+    private UiElement getHostButtonElement() {
+        String locatorId = "host-button";
+        String description = "Host Button";
+        return getViewElementById(description, locatorId);
+    }
 }

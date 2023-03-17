@@ -3,12 +3,12 @@ package com.tekgs.nextgen.goingcamping.view.landing;
 import com.softwareonpurpose.calibrator4test.Calibrator;
 
 public class LandingVewCalibrator extends Calibrator {
-    private static final String description = "'Landing' view";
+    private static final String DESCRIPTION = "'Landing' view";
     private final LandingViewExpected expected;
     private final LandingView actual;
 
     protected LandingVewCalibrator(LandingViewExpected expected, LandingView actual) {
-        super(description, expected, actual);
+        super(DESCRIPTION, expected, actual);
         this.expected = expected;
         this.actual = actual;
     }
