@@ -11,7 +11,7 @@ public class HostView extends GoingCampingView implements HostViewCalibratable {
     private static final String LOCATOR_TYPE = UiLocatorType.ID;
     private static final String LOCATOR_VALUE = "host-view";
 
-    protected HostView() {
+    public HostView() {
         super(RELATIVE_URI, UiElement.getInstance(DESCRIPTION, LOCATOR_TYPE, LOCATOR_VALUE));
     }
 
