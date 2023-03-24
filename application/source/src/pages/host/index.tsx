@@ -1,3 +1,4 @@
+import Chat from "@/components/chat/Chat";
 import { Box } from "@mui/material";
 import {NextPage} from "next";
 
@@ -11,6 +12,7 @@ const Host: NextPage = () => {
       gap: "1rem"
     }}>
       <h2 id="host-header">Welcome To Your Campsite!</h2>
+      <Chat/>
     </Box>
   )
 }

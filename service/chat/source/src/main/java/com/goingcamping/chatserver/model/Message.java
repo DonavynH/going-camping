@@ -1,4 +1,4 @@
-package com.goingcamping.chatserver.controller.model;
+package com.goingcamping.chatserver.model;
 
 import lombok.*;
 
@@ -12,4 +12,5 @@ public class Message {
     private String receiverName;
     private String message;
     private String date;
+    private Status status;
 }

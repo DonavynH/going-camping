@@ -1,4 +1,4 @@
-package com.goingcamping.chatserver.controller.model;
+package com.goingcamping.chatserver.model;
 
 public enum Status {
     JOIN,

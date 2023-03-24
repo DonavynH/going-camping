@@ -1,6 +1,6 @@
 package com.goingcamping.chatserver.controller;
 
-import com.goingcamping.chatserver.controller.model.Message;
+import com.goingcamping.chatserver.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
