@@ -4,6 +4,7 @@ import {over} from 'stompjs';
 import SockJS from 'sockjs-client';
 let stompClient =null;
 const Chat = () => {
+  const hostCode = "C137"
   const [privateChats, setPrivateChats] = useState(new Map());
   const [publicChats, setPublicChats] = useState([]);
   const [tab,setTab] =useState("CHATROOM");
@@ -77,6 +78,7 @@ const Chat = () => {
     const {value}=event.target;
     setUserData({...userData,"message": value});
   }
+
   const sendValue=()=>{
     if (stompClient) {
       const chatMessage = {

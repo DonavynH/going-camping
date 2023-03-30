@@ -2,13 +2,13 @@ import {NextPage} from "next";
 import {Box, Button} from "@mui/material";
 import campfire from "../../../assests/campfire.png";
 import Image from "next/image";
-import CampsiteNumberInput from "@/components/views/landing/CampsiteNumberInput";
+import CamperJoinForm from "@/components/views/landing/CamperJoinForm";
 import {useRouter} from "next/router";
 
 const Landing: NextPage = () => {
   const router = useRouter();
 
-  function navToHostView() {
+  const navToHostView = () => {
     router.push("host");
   }
 
@@ -23,14 +23,14 @@ const Landing: NextPage = () => {
       }}>
         <Image src={campfire} alt="campfire" width={300}/>
         <h1 id="landing-header">I'm going camping and bringing...</h1>
-        <CampsiteNumberInput/>
+        <CamperJoinForm/>
       </Box>
       <Box sx={{
         position: "absolute",
         top: "20px",
         right: "20px",
       }}>
-        <Button variant="contained" id="host-button" onClick={() => navToHostView()}>Host</Button>
+        <Button variant="contained" id="host-button" onClick={navToHostView}>Host</Button>
       </Box>
     </Box>
   );

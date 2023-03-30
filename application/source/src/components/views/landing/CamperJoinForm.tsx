@@ -1,10 +1,10 @@
 import React, {ChangeEvent, FormEvent, useState} from "react";
 import {NextPage} from "next";
 import {Box, Button, TextField} from "@mui/material";
-import { useRouter } from 'next/router'
+import {useRouter} from "next/router";
 
-const CampsiteNumberInput: NextPage = () => {
-  const router = useRouter()
+const CamperJoinForm: NextPage = () => {
+  const router = useRouter();
   type CamperData = {
     campsite: string,
     name: string
@@ -22,7 +22,10 @@ const CampsiteNumberInput: NextPage = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Camper Post Data " + JSON.stringify(camperData));
-    router.push("loading")
+    router.push({
+      pathname: '/camper/[pid]',
+      query: { pid: camperData.campsite},
+    });
   };
   return (
     <Box component={"form"} noValidate autoComplete="off" sx={{
@@ -31,13 +34,22 @@ const CampsiteNumberInput: NextPage = () => {
       gap: "1rem"
     }} onSubmit={e => handleSubmit(e)}>
 
-      <TextField name={"campsite"} id="campsite-number" label="Campsite Number" variant="outlined" size="medium"
-                 onChange={(e) => handleOnChange(e)} value={camperData.campsite}/>
-      <TextField name="name" id="camper-name" label="Campers Name" variant="outlined"
-                 onChange={(e) => handleOnChange(e)} value={camperData.name}/>
+      <TextField name={"campsite"}
+                 id="campsite-number"
+                 label="Campsite Number"
+                 variant="outlined"
+                 size="medium"
+                 onChange={handleOnChange}
+                 value={camperData.campsite}/>
+      <TextField name="name"
+                 id="camper-name"
+                 label="Campers Name"
+                 variant="outlined"
+                 onChange={handleOnChange}
+                 value={camperData.name}/>
       <Button type="submit" variant="contained" id="camper-submit">Join</Button>
     </Box>
   );
 };
 
-export default CampsiteNumberInput;
+export default CamperJoinForm;
