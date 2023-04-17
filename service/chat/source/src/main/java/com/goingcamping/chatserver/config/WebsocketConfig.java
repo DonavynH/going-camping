@@ -11,9 +11,8 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 public class WebsocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.setApplicationDestinationPrefixes("/app");
-        registry.enableSimpleBroker("/chatroom", "/host");
-        registry.setUserDestinationPrefix("/user");
+        registry.enableSimpleBroker("/chat-room");
+        registry.setApplicationDestinationPrefixes("/chat-app");
     }
 
     @Override

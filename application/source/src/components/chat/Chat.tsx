@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import {over} from 'stompjs';
 import SockJS from 'sockjs-client';
-let stompClient =null;
+let stompClient = null;
 const Chat = () => {
   const hostCode = "C137"
   const [privateChats, setPrivateChats] = useState([]);

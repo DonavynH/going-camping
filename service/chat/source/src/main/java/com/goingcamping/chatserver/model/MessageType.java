@@ -1,6 +1,6 @@
 package com.goingcamping.chatserver.model;
 
-public enum Status {
+public enum MessageType {
     JOIN,
     MESSAGE,
     LEAVE
