@@ -1,12 +1,10 @@
 // @ts-nocheck
 import React, {useState} from "react";
-import {over} from "stompjs";
-import SockJS from "sockjs-client";
 import MessageList from "@/components/chat/MessageList";
 import UsernameInput from "@/components/chat/UsernameInput";
 import MessageInput from "@/components/chat/MessageInput";
+import ChatService from "@/services/ChatService";
 
-let stompClient = null;
 const Chat = () => {
   const hostCode = "C137";
   const [chatList, setChatList] = useState([]);
@@ -16,24 +14,15 @@ const Chat = () => {
     message: ""
   });
 
-  const connect = () => {
-    let Sock = new SockJS("http://localhost:8080/ws");
-    stompClient = over(Sock);
-    stompClient.connect({}, onConnected, onError);
+  const registerUser = () => {
+    // Validate Username Here
+    ChatService.connect(onConnected, onError);
   };
 
   const onConnected = () => {
     setUserData({...userData, "connected": true});
-    stompClient.subscribe(`/chat-room/${hostCode}`, onMessageReceived);
-    userJoin();
-  };
-
-  const userJoin = () => {
-    const chatMessage = {
-      sender: userData.username,
-      status: "JOIN"
-    };
-    stompClient.send(`/chat-app/chat/${hostCode}/addUser`, {}, JSON.stringify(chatMessage));
+    ChatService.subscribe(hostCode, onMessageReceived);
+    ChatService.addUser(userData.username);
   };
 
   const onMessageReceived = (payload) => {
@@ -53,25 +42,13 @@ const Chat = () => {
   };
 
   const sendMessage = () => {
-    if (stompClient) {
-      const chatMessage = {
-        sender: userData.username,
-        content: userData.message,
-        type: "CHAT"
-      };
-      console.log("Sending Message: " + JSON.stringify(chatMessage));
-      stompClient.send(`/chat-app/chat/${hostCode}/sendMessage`, {}, JSON.stringify(chatMessage));
-      setUserData({...userData, "message": ""});
-    }
+    ChatService.sendMessage(userData.username, userData.message);
+    setUserData({...userData, "message": ""});
   };
 
   const handleUsername = (event) => {
     const {value} = event.target;
     setUserData({...userData, "username": value});
-  };
-
-  const registerUser = () => {
-    connect();
   };
 
   return (
