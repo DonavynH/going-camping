@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {over} from "stompjs";
 import SockJS from "sockjs-client";
 
@@ -34,23 +34,11 @@ const Chat = () => {
   };
 
   const onMessageReceived = (payload) => {
-    console.log(payload);
+    if (payload.command !== "MESSAGE") return;
     const newMessage = JSON.parse(payload.body);
-    const newChatList = [...chatList];
-    console.log("Current Chat List");
-    console.log(chatList);
-    newChatList.push(newMessage);
-    console.log("New Message");
-    console.log(newMessage);
-    console.log("New Chat List");
-    console.log(newChatList);
-    setChatList(newChatList);
+    chatList.push(newMessage);
+    setChatList([...chatList]);
   };
-
-  useEffect(() => {
-    console.log("Chat List change");
-    console.log(chatList);
-  }, [chatList]);
 
   const onError = (err) => {
     console.log(err);
@@ -70,7 +58,6 @@ const Chat = () => {
       };
       console.log("Sending Message: " + JSON.stringify(chatMessage));
       stompClient.send(`/chat-app/chat/${hostCode}/sendMessage`, {}, JSON.stringify(chatMessage));
-
       setUserData({...userData, "message": ""});
     }
   };
@@ -83,6 +70,7 @@ const Chat = () => {
   const registerUser = () => {
     connect();
   };
+
   return (
     <div className="container">
       {userData.connected ?
