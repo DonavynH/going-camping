@@ -2,6 +2,9 @@
 import React, {useState} from "react";
 import {over} from "stompjs";
 import SockJS from "sockjs-client";
+import MessageList from "@/components/chat/MessageList";
+import UsernameInput from "@/components/chat/UsernameInput";
+import MessageInput from "@/components/chat/MessageInput";
 
 let stompClient = null;
 const Chat = () => {
@@ -76,37 +79,12 @@ const Chat = () => {
       {userData.connected ?
         <div className="chat-box">
           <div className="chat-content">
-            <ul className="chat-messages">
-              {chatList.length && chatList.map((chat, index) => (
-                <li className={`message ${chat.sender === userData.username && "self"}`} key={index}>
-                  {chat.sender !== userData.username && <div className="avatar">{chat.sender}</div>}
-                  <div className="message-data">{chat.content}</div>
-                  {chat.sender === userData.username && <div className="avatar self">{chat.sender}</div>}
-                </li>
-              ))}
-            </ul>
-
-            <div className="send-message">
-              <input type="text" className="input-message" placeholder="enter the message" value={userData.message}
-                     onChange={handleMessage}/>
-              <button type="button" className="send-button" onClick={sendMessage}>send</button>
-            </div>
+            <MessageList chatList={chatList} currentUsername={userData.username}/>
+            <MessageInput message={userData.message} handleMessage={handleMessage} sendMessage={sendMessage}/>
           </div>
         </div>
         :
-        <div className="register">
-          <input
-            id="user-name"
-            placeholder="Enter your name"
-            name="userName"
-            value={userData.username}
-            onChange={handleUsername}
-            margin="normal"
-          />
-          <button type="button" onClick={registerUser}>
-            connect
-          </button>
-        </div>}
+        <UsernameInput username={userData.username} registerUser={registerUser} handleUsername={handleUsername}/>}
     </div>
   );
 };
