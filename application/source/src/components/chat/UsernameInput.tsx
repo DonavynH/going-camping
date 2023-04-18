@@ -2,12 +2,12 @@ import React from "react";
 
 type Props = {
   username: string,
-  handleUsername: () => string,
-  registerUser: () => void
+  handleUsername: (event:any) => void,
+  handleSubmit: () => void
 }
 
 const UsernameInput = (props: Props) => {
-  const {username, handleUsername, registerUser} = props;
+  const {username, handleUsername, handleSubmit} = props;
   return (
     <div className="register">
       <input
@@ -17,7 +17,7 @@ const UsernameInput = (props: Props) => {
         value={username}
         onChange={handleUsername}
       />
-      <button type="button" onClick={registerUser}>
+      <button type="button" onClick={handleSubmit}>
         connect
       </button>
     </div>

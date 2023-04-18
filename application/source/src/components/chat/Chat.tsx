@@ -1,28 +1,36 @@
 // @ts-nocheck
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import MessageList from "@/components/chat/MessageList";
-import UsernameInput from "@/components/chat/UsernameInput";
 import MessageInput from "@/components/chat/MessageInput";
 import ChatService from "@/services/ChatService";
+import Loading from "@/components/loading/Loading";
 
-const Chat = () => {
-  const hostCode = "C137";
+type Props = {
+  hostCode: string,
+  username: string
+}
+
+const Chat = (props: Props) => {
+  const {hostCode, username} = props;
   const [chatList, setChatList] = useState([]);
   const [userData, setUserData] = useState({
-    username: "",
+    username: username,
     connected: false,
     message: ""
   });
 
-  const registerUser = () => {
-    // Validate Username Here
+  useEffect(()=>{
     ChatService.connect(onConnected, onError);
-  };
+  }, [])
 
   const onConnected = () => {
     setUserData({...userData, "connected": true});
     ChatService.subscribe(hostCode, onMessageReceived);
-    ChatService.addUser(userData.username);
+    ChatService.addUser(username);
+  };
+
+  const onError = (err) => {
+    console.log(err);
   };
 
   const onMessageReceived = (payload) => {
@@ -30,10 +38,6 @@ const Chat = () => {
     const newMessage = JSON.parse(payload.body);
     chatList.push(newMessage);
     setChatList([...chatList]);
-  };
-
-  const onError = (err) => {
-    console.log(err);
   };
 
   const handleMessage = (event) => {
@@ -46,22 +50,14 @@ const Chat = () => {
     setUserData({...userData, "message": ""});
   };
 
-  const handleUsername = (event) => {
-    const {value} = event.target;
-    setUserData({...userData, "username": value});
-  };
-
   return (
     <div className="container">
-      {userData.connected ?
-        <div className="chat-box">
-          <div className="chat-content">
-            <MessageList chatList={chatList} currentUsername={userData.username}/>
-            <MessageInput message={userData.message} handleMessage={handleMessage} sendMessage={sendMessage}/>
-          </div>
+      {userData.connected ? <div className="chat-box">
+        <div className="chat-content">
+          <MessageList chatList={chatList} currentUsername={userData.username}/>
+          <MessageInput message={userData.message} handleMessage={handleMessage} sendMessage={sendMessage}/>
         </div>
-        :
-        <UsernameInput username={userData.username} registerUser={registerUser} handleUsername={handleUsername}/>}
+      </div>: <Loading/>}
     </div>
   );
 };

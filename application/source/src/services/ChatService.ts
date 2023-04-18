@@ -8,6 +8,7 @@ let campCode: string | null = null;
 
 export default {
   connect(onConnected: () => void, onError: () => void) {
+    if(stompClient) return;
     const Sock = new SockJS(BASE_URL);
     stompClient = over(Sock);
     stompClient?.connect({}, onConnected, onError);
