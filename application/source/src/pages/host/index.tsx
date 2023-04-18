@@ -3,6 +3,7 @@ import {Box} from "@mui/material";
 import {NextPage} from "next";
 import UsernameInput from "@/components/chat/UsernameInput";
 import React, {useState} from "react";
+import {isValidUsername} from "@/validations/TextValidations";
 
 const Host: NextPage = () => {
   const hostCode = "C137";
@@ -15,8 +16,9 @@ const Host: NextPage = () => {
   };
 
   const handleSubmit = () => {
-    setIsChat(true)
-  }
+    if (!isValidUsername(username)) return;
+    setIsChat(true);
+  };
   return (
     <Box id="host-view" sx={{
       display: "flex",

@@ -4,6 +4,7 @@ import MessageList from "@/components/chat/MessageList";
 import MessageInput from "@/components/chat/MessageInput";
 import ChatService from "@/services/ChatService";
 import Loading from "@/components/loading/Loading";
+import {isValidMessage} from "@/validations/TextValidations";
 
 type Props = {
   hostCode: string,
@@ -19,9 +20,9 @@ const Chat = (props: Props) => {
     message: ""
   });
 
-  useEffect(()=>{
+  useEffect(() => {
     ChatService.connect(onConnected, onError);
-  }, [])
+  }, []);
 
   const onConnected = () => {
     setUserData({...userData, "connected": true});
@@ -46,18 +47,23 @@ const Chat = (props: Props) => {
   };
 
   const sendMessage = () => {
+    if (!isValidMessage(userData.message)) return;
     ChatService.sendMessage(userData.username, userData.message);
     setUserData({...userData, "message": ""});
   };
 
+  const renderChat = () => (
+    <div className="chat-box">
+      <div className="chat-content">
+        <MessageList chatList={chatList} currentUsername={userData.username}/>
+        <MessageInput message={userData.message} handleMessage={handleMessage} sendMessage={sendMessage}/>
+      </div>
+    </div>
+  );
+
   return (
     <div className="container">
-      {userData.connected ? <div className="chat-box">
-        <div className="chat-content">
-          <MessageList chatList={chatList} currentUsername={userData.username}/>
-          <MessageInput message={userData.message} handleMessage={handleMessage} sendMessage={sendMessage}/>
-        </div>
-      </div>: <Loading/>}
+      {userData.connected ? renderChat() : <Loading/>}
     </div>
   );
 };
