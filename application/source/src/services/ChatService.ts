@@ -20,7 +20,7 @@ export default {
   addUser(username: string) {
     const chatMessage = {
       sender: username,
-      status: "JOIN"
+      messageType: "JOIN"
     };
     stompClient?.send(`/chat-app/chat/${campCode}/addUser`, {}, JSON.stringify(chatMessage));
   },
@@ -28,9 +28,9 @@ export default {
     const chatMessage = {
       sender: userName,
       content: message,
-      type: "CHAT"
+      type: "CHAT",
+      messageType: "CHAT"
     };
     stompClient?.send(`/chat-app/chat/${campCode}/sendMessage`, {}, JSON.stringify(chatMessage));
-
   }
 }

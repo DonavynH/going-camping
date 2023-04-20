@@ -124,3 +124,19 @@ ul {
 .message.self{
     justify-content: end;
 }
+
+.chat-sender{
+    background: blue;
+    border-radius: 10px;
+    border: 5px solid blue;
+}
+.chat-receiver{
+    background: lightgrey;
+    border-radius: 10px;
+    border: 5px solid lightgrey;
+    color: black;
+}
+
+.chat-system{
+    color: lightgrey;
+}

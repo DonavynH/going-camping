@@ -35,7 +35,10 @@ const Chat = (props: Props) => {
   };
 
   const onMessageReceived = (payload) => {
-    if (payload.command !== "MESSAGE") return;
+    if (payload.command === "MESSAGE") {
+
+
+    };
     const newMessage = JSON.parse(payload.body);
     chatList.push(newMessage);
     setChatList([...chatList]);
